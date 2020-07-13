@@ -363,10 +363,25 @@ export const initialState = [
 		"options": [
 			{
 				"name": "LnaZin",
+				"description": "50 ohms",
+				"value": 0x0,
+				"mask": 0x1,
+				"shift": 7,
+			},
+			{
+				"name": "LnaZin",
 				"description": "200 ohms",
 				"value": 0x1,
 				"mask": 0x1,
 				"shift": 7,
+			},
+
+			{
+				"name": "LnaGainSelect",
+				"description": "gain set by the internal AGC loop",
+				"value": 0x00,
+				"mask": 0x7,
+				"shift": 0,
 			},
 			{
 				"name": "LnaGainSelect",
@@ -496,18 +511,33 @@ export const initialState = [
 		"value": 0x10,
 		"options": [
 			{
-				"name": "AfcAutoclearOn",
-				"description": "Only valid if AfcAutoOn is set; AFC register is cleared before a new AFC phase",
+				"name": "AfcAutoOn",
+				"description": "Off - AFC is performed each time AfcStart is set",
+				"value": 0x0,
+				"mask": 0x1,
+				"shift": 2,
+			},
+			{
+				"name": "AfcAutoOn",
+				"description": "On - AFC is performed each time Rx mode is entered",
 				"value": 0x1,
+				"mask": 0x1,
+				"shift": 2,
+			},
+
+			{
+				"name": "AfcAutoclearOn",
+				"description": "Off - AFC register is not cleared before a new AFC phase",
+				"value": 0x0,
 				"mask": 0x1,
 				"shift": 3,
 			},
 			{
-				"name": "AfcAutoOn",
-				"description": "AFC is performed each time Rx mode is entered",
+				"name": "AfcAutoclearOn",
+				"description": "On - AFC register is cleared before a new AFC phase (Only valid if AfcAutoOn is set)",
 				"value": 0x1,
 				"mask": 0x1,
-				"shift": 2,
+				"shift": 3,
 			},
 		]
 	},
@@ -639,6 +669,13 @@ export const initialState = [
 				"shift": 4,
 			},
 
+			{
+				"name": "CrcAutoClearOff",
+				"description": "Clear FIFO and restart new packet reception. No PayloadReady interrupt issued.",
+				"value": 0x0,
+				"mask": 0x1,
+				"shift": 3,
+			},
 			{
 				"name": "CrcAutoClearOff",
 				"description": "Do not clear FIFO. PayloadReady interrupt issued.",
@@ -861,6 +898,7 @@ export const initialState = [
 				"shift": 4,
 				"range": [0x0, 0xf],
 			},
+
 			{
 				"name": "AutoRxRestartOn",
 				"description": "Rx automatically restarted after InterPacketRxDelay",
@@ -868,6 +906,7 @@ export const initialState = [
 				"mask": 0x1,
 				"shift": 1,
 			},
+
 			{
 				"name": "AesOn",
 				"description": "Enable the AES encryption/decryption",
