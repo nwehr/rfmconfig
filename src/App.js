@@ -1,5 +1,5 @@
 import React, { useContext, createContext } from 'react';
-import { StoreContext } from "./state"
+import { StoreContext } from "./StoreProvider"
 import './App.css';
 
 const RegisterContext = createContext()
@@ -8,6 +8,7 @@ const App = props => {
     const { state } = useContext(StoreContext)
 
     return <div>
+        <p><a href="https://github.com/nwehr/rfmconfig">github.com/nwehr/rfmconfig</a></p>
         {
             state.map(r => <Register reg={r} key={r.name} />)
         }

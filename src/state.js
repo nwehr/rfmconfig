@@ -1,6 +1,3 @@
-import React, { useReducer, createContext } from "react"
-import { byName, applyOption, clearOption } from "./App"
-
 export const initialState = [
 	{
 		"name": "OpMode",
@@ -606,6 +603,13 @@ export const initialState = [
 		"options": [
 			{
 				"name": "PacketFormat",
+				"description": "Fixed length",
+				"value": 0x0,
+				"mask": 0x1,
+				"shift": 7,
+			},
+			{
+				"name": "PacketFormat",
 				"description": "Variable length",
 				"value": 0x1,
 				"mask": 0x1,
@@ -990,45 +994,3 @@ export const initialState = [
 		"value": 0x00,
 	},
 ]
-
-export const reducer = (prevState, action) => {
-	const state = [...prevState]
-
-	switch (action.type) {
-		case "APPLY_OPTION":
-			{
-				const { option, regName } = action.payload
-				const i = state.findIndex(byName(regName))
-				state[i].value = applyOption(option, state[i].value)
-			}
-			break
-		case "CLEAR_OPTION":
-			{
-				const { option, regName } = action.payload
-				const i = state.findIndex(byName(regName))
-				state[i].value = clearOption(option, state[i].value)
-			}
-			break
-		case "SET_REGISTER":
-			{
-				const { name, value } = action.payload
-				const i = state.findIndex(byName(name))
-				state[i].value = value
-			}
-			break
-	}
-
-	return state
-}
-
-export const StoreContext = createContext()
-
-const Provider = (props) => {
-	const [state, dispatch] = useReducer(reducer, initialState)
-
-	return <StoreContext.Provider value={{ state, dispatch }}>
-		{props.children}
-	</StoreContext.Provider>
-}
-
-export default Provider
