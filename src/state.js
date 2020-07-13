@@ -58,7 +58,7 @@ export const initialState = [
 		]
 	},
 	{
-		"name": "DateModul",
+		"name": "DataModul",
 		"addr": 0x02,
 		"value": 0x00,
 		"options": [
